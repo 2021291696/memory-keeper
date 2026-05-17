@@ -4,7 +4,7 @@
 
 ## 为什么需要
 
-- global-tidy 是**定期批量整理**，memory-keeper 是**即时单条响应**
+- [weaver-自我迭代](https://github.com/2021291696/weaver-evolve) 是**定期批量整理**，memory-keeper 是**即时单条响应**
 - 你说"记住这个"，它立即判断放哪、怎么融入、周边要不要整理
 - 你说"忘掉那个"，它搜索、确认、删除、整理残骸
 
@@ -42,14 +42,20 @@ memory-keeper/
     └── merge-examples.md        — 融入实操示例（正例+反例）
 ```
 
-## 与 global-tidy 的关系
+## 与 weaver-自我迭代 的关系
 
-| | memory-keeper | global-tidy |
+| | memory-keeper | weaver-自我迭代 |
 |------|---------------|-------------|
 | 触发 | 实时"记住"指令 | 手动/定期 |
 | 粒度 | 单条即时 | 批量扫历史 |
 | 删除 | 确认后+整理结构 | 被动矛盾+主动扫描 |
 | 优化建议 | 视情况 | 视情况 |
+
+## 关联项目
+
+- [weaver-自我迭代](https://github.com/2021291696/weaver-evolve) — 全局整理 skill，遵循 memory-keeper 的融入 8 条原则进行分层归档
+- [file-tidy](https://github.com/2021291696/file-tidy) — 文件系统整理 skill，weaver 在全局整理时调用
+- [skill-bootstrapper](https://github.com/2021291696/skill-bootstrapper) — 本 skill 经其 Eval 通道创建
 
 ## 设计理念
 
