@@ -1,59 +1,68 @@
-# memory-keeper — 即时记忆管理 Skill
+<!-- BADGE BAR -->
+[![License](https://img.shields.io/badge/license-MIT-blue)](./LICENSE)
+[![Claude Code](https://img.shields.io/badge/Claude%20Code-Skill-orange)](https://claude.ai)
 
-即时响应"记住"和"忘掉"指令，将信息融入正确位置并自动整理结构。
+# memory-keeper
 
-## 为什么需要
+> **即时记忆管理。** 把用户"记住"指令融入正确位置——全局/项目/子项目的记忆系统或配置文件。也处理"忘掉"指令，删除后整理受影响的结构。
 
-- global-tidy 是**定期批量整理**，memory-keeper 是**即时单条响应**
-- 你说"记住这个"，它立即判断放哪、怎么融入、周边要不要整理
-- 你说"忘掉那个"，它搜索、确认、删除、整理残骸
+[English](#english)
 
-**融入而非追加**：不是文末加一行，而是找到已有相关内容，在原处更新。
+---
 
-## 功能
+## 为什么需要 memory-keeper？
 
-1. **记住** — 7 步流程：判断层级 → 类型 → 搜索 → 展示计划 → 确认 → 写入 → 周边整理
-2. **忘掉** — 6 步流程：搜索 → 展示 → 分析影响 → 展示影响 → 确认 → 删除+整理
-3. **融入规则** — 8 条：先搜后写 / 更新优于追加 / 矛盾以新为准 / 互补链接 / 删除不留残骸 / 绝对时间 / 一条一事 / 面向读者
-4. **6 种信息类型** — 偏好习惯、工具选择、项目决策、踩坑记录、个人特性、事实信息
-5. **修改范围** — 不只 memory，还包括 settings.json、CLAUDE.md 等配置文件
+- **"记住"一句话，但不知道记在哪。** 全局规则？项目 CLAUDE.md？Obsidian 知识库？memory-keeper 自动路由到正确位置。
+- **"忘掉"比"记住"更难。** 一条记忆删了，引用它的索引还在、交叉链接可能断裂。memory-keeper 删一条修一片。
+- **记忆不分类 = 噪音。** 操作偏好、项目事实、学术概念——混在一起，未来 AI 加载一堆无关内容。
 
-## 触发词
+## 核心能力
 
-**记住：** "帮我把...加入记忆"、"你要记住..."、"以后也要记住"、"记住..."、"记下来"、"记住了"
+- 🧠 **智能路由** — 自动判断信息该进 memory/（操作记忆）还是 Obsidian wiki/（长期知识）
+- ➕ **记住流程** — 7 步：确认 → 判断类型 → 路由 → 写入 → 更新索引 → 自动 wikilink
+- ➖ **忘掉流程** — 6 步：定位 → 确认 → 删除 → 清理引用 → 更新索引 → 检查孤儿链接
+- 🔗 **双向同步** — memory 和 Obsidian 之间的 wikilink 自动维护
 
-**忘掉：** "忘了..."、"不用再记..."、"不要再记..."、"删掉...的记忆"、"清除..."
+## 快速开始
 
-## 安装
+### 触发
 
-```powershell
-git clone https://github.com/2021291696/memory-keeper.git
-Copy-Item -Recurse memory-keeper/ "$env:USERPROFILE\.claude\skills\memory-keeper"
-```
+| 你说 | 它做什么 |
+|------|---------|
+| `记住 XX` / `记下来` | 写入记忆并自动路由 |
+| `忘了 XX` / `不用再记` | 删除记忆并清理引用 |
 
-## 文件结构
+## 设计哲学
 
-```
-memory-keeper/
-├── SKILL.md                     — 主指令
-├── README.md                    — 本文件
-└── references/
-    ├── layer-guide.md           — 分层决策详细指南
-    └── merge-examples.md        — 融入实操示例（正例+反例）
-```
+**路由比存储更重要。** 一条信息放在错误的地方 = 噪音。放在正确的地方 = 未来 AI 刚好加载到。memory-keeper 的核心价值不是"存得更多"，是"存得更准"。
 
-## 与 global-tidy 的关系
+**忘掉和记住同样重要。** 信息有生命周期。过期的偏好、推翻的决策、已完成的任务——不删就是负债。
 
-| | memory-keeper | global-tidy |
-|------|---------------|-------------|
-| 触发 | 实时"记住"指令 | 手动/定期 |
-| 粒度 | 单条即时 | 批量扫历史 |
-| 删除 | 确认后+整理结构 | 被动矛盾+主动扫描 |
-| 优化建议 | 视情况 | 视情况 |
+## 相关项目
 
-## 设计理念
+| 项目 | 关系 |
+|------|------|
+| [weaver-evolve](https://github.com/2021291696/weaver-evolve) | 上游 — 全局整理时调用我 |
+| [skill-optimizer](https://github.com/2021291696/skill-optimizer) | 上游 — 优化决策写入记忆 |
 
-- **融入优先**：更新原文，而非追加——一个事实只有一个版本
-- **展示再写**：先告诉你计划，确认后再执行——记忆操作不可逆
-- **写后整理**：写完检查周边——不留下残骸和碎片
-- **保守下沉**：不确定放哪层时放项目级——全局污染代价远大于项目遗漏
+## License
+
+MIT
+
+---
+
+## English
+
+# memory-keeper
+
+> **Instant memory management.** Routes "remember this" instructions to the correct destination — global rules, project config, or Obsidian wiki. Also handles "forget that" with full cleanup.
+
+### Why?
+
+Knowing what to remember is easy. Knowing *where* to put it is the real problem. memory-keeper auto-routes information by type and audience.
+
+### Design Philosophy
+
+**Routing over storage.** Right place = future AI loads it at the right time. Wrong place = noise.
+
+**Forgetting is as important as remembering.** Stale preferences, overturned decisions, completed tasks — keeping them is debt.
